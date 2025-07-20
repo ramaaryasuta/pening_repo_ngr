@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pening_repository_ngr/core/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -26,7 +27,9 @@ void main() {
 
       runApp(
         MultiProvider(
-          providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+          providers: [
+            ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
+          ],
           child: const MyApp(),
         ),
       );
@@ -46,6 +49,7 @@ class MyApp extends StatelessWidget {
       title: 'PRN', // Pening Repository NGR
       debugShowCheckedModeBanner: false,
       routerConfig: appRoute,
+      theme: appTheme,
     );
   }
 }
