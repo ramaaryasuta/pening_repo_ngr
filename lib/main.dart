@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pening_repository_ngr/core/theme/app_theme.dart';
+import 'core/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -12,6 +12,8 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'core/routing/go_router.dart';
 import 'firebase_options.dart';
 import 'screens/auth/providers/auth_provider.dart';
+import 'screens/create_post/provider/create_post_provider.dart';
+import 'screens/home/providers/home_provider.dart';
 
 void main() {
   runZonedGuarded(
@@ -29,6 +31,8 @@ void main() {
         MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
+            ChangeNotifierProvider(create: (_) => HomeProvider()),
+            ChangeNotifierProvider(create: (_) => CreatePostProvider()),
           ],
           child: const MyApp(),
         ),

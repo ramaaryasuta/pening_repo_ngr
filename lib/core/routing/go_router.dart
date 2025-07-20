@@ -1,9 +1,12 @@
 import 'package:go_router/go_router.dart';
-import 'package:pening_repository_ngr/screens/auth/view/auth_screen.dart';
-import 'package:pening_repository_ngr/screens/home/view/home_screen.dart';
-import 'package:pening_repository_ngr/screens/splash/splash_screen.dart';
+import 'auth_guard.dart';
+import '../../screens/create_post/view/create_post_screen.dart';
+import '../../screens/auth/view/auth_screen.dart';
+import '../../screens/home/view/home_screen.dart';
+import '../../screens/splash/splash_screen.dart';
 
 final GoRouter appRoute = GoRouter(
+  initialLocation: '/',
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -20,7 +23,14 @@ final GoRouter appRoute = GoRouter(
     GoRoute(
       path: '/home',
       builder: (context, state) {
-        return const HomeScreen();
+        //! USE AUTHGUARD for AUTH SCREEN
+        return const AuthGuard(child: HomeScreen());
+      },
+    ),
+    GoRoute(
+      path: '/create-post',
+      builder: (context, state) {
+        return const AuthGuard(child: CreateScreen());
       },
     ),
   ],

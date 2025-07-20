@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
-import 'package:pening_repository_ngr/core/extensions/context_extensions.dart';
-import 'package:pening_repository_ngr/shared/widgets/images/network_image.dart';
+import '../../core/extensions/context_extensions.dart';
+import 'images/network_image.dart';
 import 'package:provider/provider.dart';
 
 import '../../screens/auth/providers/auth_provider.dart';
 
 class MAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const MAppBar({super.key});
+  final String title;
+
+  const MAppBar({super.key, required this.title});
 
   @override
   State<MAppBar> createState() => _MAppBarState();
@@ -31,7 +33,7 @@ class _MAppBarState extends State<MAppBar> {
         return AppBar(
           centerTitle: false,
           title: Text(
-            "PRN",
+            widget.title,
             style: context.titleMediumTextStyle!.copyWith(
               fontWeight: FontWeight.bold,
             ),

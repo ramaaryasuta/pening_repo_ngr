@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pening_repository_ngr/core/extensions/context_extensions.dart';
+import '../../../core/extensions/context_extensions.dart';
 
 class MFilledButton extends StatelessWidget {
   final Widget child;

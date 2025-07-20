@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pening_repository_ngr/screens/auth/providers/auth_services.dart';
+import 'auth_services.dart';
+import '../../../shared/utils/preferences.dart';
 
 class AuthenticationProvider with ChangeNotifier {
   final AuthServices _authServices = AuthServices();
@@ -16,10 +17,16 @@ class AuthenticationProvider with ChangeNotifier {
   User? get user => _user;
 
   Future<UserCredential?> login() async {
-    return await _authServices.signInWithGoogle();
+    final result = await _authServices.signInWithGoogle();
+    if (result != null) {
+      setIsLogged(true);
+      return result;
+    }
+    return null;
   }
 
   Future<void> logout() async {
+    setIsLogged(false);
     await _authServices.signOut();
   }
 }

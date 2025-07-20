@@ -19,8 +19,19 @@ class $AssetsIconsGen {
   List<String> get values => [google];
 }
 
+class $AssetsLottieGen {
+  const $AssetsLottieGen();
+
+  /// File path: assets/lottie/empty_box.json
+  String get emptyBox => 'assets/lottie/empty_box.json';
+
+  /// List of all assets
+  List<String> get values => [emptyBox];
+}
+
 class Assets {
   const Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
