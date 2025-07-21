@@ -17,14 +17,17 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getAllPosts() async {
+  Future<void> getAllPosts(String userId) async {
     setLoading(true);
+    log('getAllPosts called...');
     try {
-      posts = await _firebaseUserService.getAllPostsFromAllUsers();
-    } catch (e) {
-      log('getAllPosts error: $e');
+      posts = await _firebaseUserService.getAllPostsFromAllUsers(userId);
+      log('Posts fetched: ${posts.length}');
+    } catch (e, stack) {
+      log('getAllPosts error: $e\n$stack');
     } finally {
       setLoading(false);
+      log('Loading stopped');
       notifyListeners();
     }
   }

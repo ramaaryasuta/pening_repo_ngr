@@ -24,12 +24,10 @@ class _MAppBarState extends State<MAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final authP = context.read<AuthenticationProvider>();
+    final authP = context.watch<AuthenticationProvider>();
 
     return LayoutBuilder(
       builder: (context, constraint) {
-        final maxWidth = constraint.maxWidth;
-
         return AppBar(
           centerTitle: false,
           title: Text(
@@ -53,11 +51,47 @@ class _MAppBarState extends State<MAppBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: CircleAvatar(
+                        child: MNetworkImage(
+                          authP.user?.photoURL,
+                          radius: 100,
+                          fit: BoxFit.cover,
+                          width: 32,
+                          height: 32,
+                          errorWidget: const Icon(
+                            Icons.account_circle,
+                            color: Colors.grey,
+                            size: 32,
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        authP.user?.displayName ?? '',
+                        style: context.labelLargeTextStyle!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        authP.user?.email ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.labelSmallTextStyle!.copyWith(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    const Divider(height: 0),
+                    ListTile(
                       onTap: () {
                         context.read<AuthenticationProvider>().logout();
                         context.go('/');
                       },
-                      leading: const Icon(Icons.logout, size: 16),
+                      leading: const Icon(
+                        Icons.logout,
+                        color: Colors.red,
+                        size: 16,
+                      ),
                       title: Text(
                         "Logout",
                         style: context.labelSmallTextStyle!.copyWith(
@@ -69,32 +103,20 @@ class _MAppBarState extends State<MAppBar> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Row(
-                  spacing: 10,
-                  children: [
-                    if (maxWidth > 600) ...[
-                      const SizedBox(width: 10),
-                      Text(
-                        authP.user?.displayName ?? "",
-                        style: context.bodySmallTextStyle,
-                      ),
-                    ],
-                    CircleAvatar(
-                      child: MNetworkImage(
-                        authP.user?.photoURL,
-                        radius: 100,
-                        fit: BoxFit.cover,
-                        width: 32,
-                        height: 32,
-                        errorWidget: const Icon(
-                          Icons.account_circle,
-                          color: Colors.grey,
-                          size: 32,
-                        ),
-                      ),
+                padding: const EdgeInsets.only(right: 10),
+                child: CircleAvatar(
+                  child: MNetworkImage(
+                    authP.user?.photoURL,
+                    radius: 100,
+                    fit: BoxFit.cover,
+                    width: 32,
+                    height: 32,
+                    errorWidget: const Icon(
+                      Icons.account_circle,
+                      color: Colors.grey,
+                      size: 32,
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

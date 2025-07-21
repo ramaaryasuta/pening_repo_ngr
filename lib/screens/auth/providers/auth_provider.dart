@@ -5,7 +5,7 @@ import '../../../shared/utils/preferences.dart';
 
 class AuthenticationProvider with ChangeNotifier {
   final AuthServices _authServices = AuthServices();
-  User? _user;
+  User? _user; // from firebase
 
   AuthenticationProvider() {
     _authServices.authStateChanges.listen((user) {
@@ -15,6 +15,10 @@ class AuthenticationProvider with ChangeNotifier {
   }
 
   User? get user => _user;
+
+  void notify() {
+    notifyListeners();
+  }
 
   Future<UserCredential?> login() async {
     final result = await _authServices.signInWithGoogle();

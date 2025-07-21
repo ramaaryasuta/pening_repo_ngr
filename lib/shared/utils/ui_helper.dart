@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class UiHelper {
@@ -12,7 +13,7 @@ abstract class UiHelper {
     if (isLoading) {
       showDialog(
         context: context,
-        builder: (context) => const Center(child: CircularProgressIndicator()),
+        builder: (context) => const Center(child: CupertinoActivityIndicator()),
       );
     } else {
       Navigator.pop(context);

@@ -60,4 +60,5 @@ class DefaultFirebaseOptions {
     authDomain: 'ngr-web-847de.firebaseapp.com',
     storageBucket: 'ngr-web-847de.firebasestorage.app',
   );
+
 }

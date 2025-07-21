@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pening_repository_ngr/shared/utils/validation.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../shared/widgets/base_dialog.dart';
 import '../../../../shared/widgets/text_field.dart';
@@ -13,6 +14,15 @@ void openAddNewLinksDialog(BuildContext context) {
   final urlCtrl = TextEditingController();
 
   void validate() {
+    if (!isValidUrl(urlCtrl.text)) {
+      showSnackbar(
+        context: context,
+        message: 'Invalid URL, URL must start with http:// or https://',
+        status: SnackbarStatus.error,
+      );
+      return;
+    }
+
     if (titleCtrl.text.isNotEmpty && urlCtrl.text.isNotEmpty) {
       final createPostP = context.read<CreatePostProvider>();
 

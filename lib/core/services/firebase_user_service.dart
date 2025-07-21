@@ -5,7 +5,7 @@ import '../../screens/home/models/post_model.dart';
 class FirebaseUserService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<List<PostModel>> getAllPostsFromAllUsers() async {
+  Future<List<PostModel>> getAllPostsFromAllUsers(String userId) async {
     final querySnapshot = await _firestore.collectionGroup('posts').get();
 
     return querySnapshot.docs.map((doc) {
